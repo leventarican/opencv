@@ -67,9 +67,3 @@ cv2.destroyWindow(windows_id)
 # imwrite: filename, image, params (extention, quality, ...)
 cv2.imwrite('zero_cv2.jpg', img)
 display()
-
-# ################################################
-# read a color image
-
-channels = 3
-channels_transparency = 4
