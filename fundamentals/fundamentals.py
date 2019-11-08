@@ -6,7 +6,7 @@ def display():
     pressed_key = cv2.waitKey(0)
     cv2.destroyWindow(windows_id)
 
-imagepath = 'number_zero.jpg'
+imagepath = '../number_zero.jpg'
 img = cv2.imread(imagepath, cv2.IMREAD_GRAYSCALE)
 # print(img)
 
