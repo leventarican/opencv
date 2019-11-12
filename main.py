@@ -1,5 +1,12 @@
 # try, learn, practice, test, ... do it all here.
 
+def image_channels():
+    import cv2
+
+    img_jpeg = cv2.imread('lion.jpg')
+    rows, cols, channels = img_jpeg.shape
+    print(channels)
+
 def chart():
     import matplotlib.pyplot as plt
 
@@ -53,4 +60,5 @@ def create_image():
 if __name__ == "__main__":
     # chart()
     # slicing()
-    create_image()
+    # create_image()
+    image_channels()

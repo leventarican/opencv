@@ -9,7 +9,7 @@ _jpeg = np.float32(_jpeg)/255
 plt.imshow(_jpeg[:,:,::-1])
 plt.title("lion")
 
-_png_path = "tree.png"
+_png_path = "../tree.png"
 _png = cv2.imread(_png_path, -1) # -1: with alpha channel
 _png = np.float32(_png)/255
 _png = cv2.resize(_png, None, fx=0.05, fy=0.05)
