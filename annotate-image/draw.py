@@ -46,6 +46,22 @@ def draw_text(img):
     font_scale = 1.5
     cv2.putText(img, text, bottom_left_corner, font_face, font_scale, color=(0,255,0), thickness=2)
 
+    # calculate the font_scale for the desired pixel height
+    pixel_height = 20
+    font_scale = cv2.getFontScaleFromHeight(font_face, pixel_height, thickness=2)
+    print(f'desired font_scale: {font_scale}')
+
+    cv2.putText(img, text, bottom_left_corner, font_face, font_scale, color=(255,0,0), thickness=2)
+
+    # now center the text
+    img_height, img_width = img.shape[:2]
+    text_size, base_line = cv2.getTextSize(text, font_face, font_scale, thickness=2)
+    text_width, text_height = text_size
+    print(f'text width: {text_width}; text height: {text_height}; base line: {base_line}')
+    x_center = (img_width - text_width) // 2
+    y_position = (img_height - base_line - 10)  # 10 pixel above bottom
+    cv2.putText(img, text, (x_center, y_position), font_face, font_scale, color=(0,0,255), thickness=2)
+
 if __name__ == "__main__":
     path = '../lion.jpg'
     img = load_image(path)
