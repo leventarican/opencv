@@ -57,8 +57,29 @@ def create_image():
     plt.imshow(image)
     plt.show()
 
+def arrays():
+    import numpy
+
+    example = numpy.array([
+        [255, 0, 0],
+        [0, 255, 0],
+        [0, 0, 255],
+        [0, 0, 0]
+    ])
+
+    print(example)
+    print(len(example))
+    print(example.shape)
+
+    rows, cols = example.shape
+
+    for x in range(0, rows):
+        for y in range(0, cols):
+            print(f'x: {x}; y: {y}')
+
 if __name__ == "__main__":
     # chart()
     # slicing()
     # create_image()
-    image_channels()
+    # image_channels()
+    arrays()
