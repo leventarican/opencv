@@ -77,9 +77,14 @@ def arrays():
         for y in range(0, cols):
             print(f'x: {x}; y: {y}')
 
+def test_case0():
+    print(f'modulo: {5%4}')
+    print(f'display the type: {type(2)}')
+
 if __name__ == "__main__":
     # chart()
     # slicing()
     # create_image()
     # image_channels()
-    arrays()
+    # arrays()
+    test_case0()
