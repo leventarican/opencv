@@ -7,11 +7,11 @@ import numpy as np
 # except the part of cv2.multiply (arithmetic operations)
 # instead we use bitwise operations cv2.bitwise_and, ...
 
-_jpeg_path = "../lion.jpg"
+_jpeg_path = "lion.jpg"
 _jpeg = cv2.imread(_jpeg_path)
 _jpeg = np.float32(_jpeg)/255
 
-_png_path = "../tree.png"
+_png_path = "tree.png"
 _png = cv2.imread(_png_path, -1) # -1: with alpha channel
 _png = np.float32(_png)/255
 _png = cv2.resize(_png, None, fx=0.05, fy=0.05)

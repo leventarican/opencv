@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # https://en.wikipedia.org/wiki/File:Qr-1.png
 # https://docs.opencv.org/4.1.0/de/dc3/classcv_1_1QRCodeDetector.html
 
-filename = '../qr-1.png'
+filename = 'qr-1.png'
 img = cv2.imread(filename)
 
 # print(img.shape)

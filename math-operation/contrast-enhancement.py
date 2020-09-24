@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-img = cv2.imread('../lion.jpg')
+img = cv2.imread('lion.jpg')
 
 contrastPercentage = 30
 contrastValue = (1+contrastPercentage/100)  # 1.3

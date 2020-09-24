@@ -1,4 +1,4 @@
 import cv2
 
-print('display cv2 version (expected 4.1.0):')
+print('display cv2 version:')
 print(cv2.__version__)

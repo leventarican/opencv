@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # #############################################################################
 # image mask has same size as original
 # binary: white pixel we interested in; black not interested in
-file = '../lion.jpg'
+file = 'lion.jpg'
 img = cv2.imread(file)
 
 mask = np.zeros_like(img)

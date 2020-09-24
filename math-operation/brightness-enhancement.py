@@ -5,7 +5,7 @@ import numpy as np
 # #############################################################################
 # general proceed: add intensity to each pixel
 
-img = cv2.imread('../lion.jpg')
+img = cv2.imread('lion.jpg')
 
 brightnessOffset = 50
 brightnessHigh = img + brightnessOffset

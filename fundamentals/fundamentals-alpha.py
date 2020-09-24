@@ -10,8 +10,9 @@ imagepath = 'panther.png'
 # flag: -1 for unchanged
 img = cv2.imread(imagepath, -1)
 
-print("image Dimension ={}".format(img.shape))
+# print("image Dimension ={}".format(img.shape))
 # output: image Dimension =(608, 640, 4)
+print(f"image dimension {img.shape}")
 
 # now extract the RGB-channel and the alpha channel
 rgb = img[:,:,0:3]

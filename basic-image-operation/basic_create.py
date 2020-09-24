@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # #############################################################################
 # display an image
-file = '../lion.jpg'
+file = 'lion.jpg'
 img = cv2.imread(file)
 plt.imshow(img[:,:,::-1])
 

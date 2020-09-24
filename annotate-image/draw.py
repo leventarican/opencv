@@ -63,7 +63,7 @@ def draw_text(img):
     cv2.putText(img, text, (x_center, y_position), font_face, font_scale, color=(0,0,255), thickness=2)
 
 if __name__ == "__main__":
-    path = '../lion.jpg'
+    path = 'lion.jpg'
     img = load_image(path)
     draw_line(img)
     draw_circle(img)

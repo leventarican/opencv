@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # #############################################################################
 # crop an image: extract a rectangular region of an image
-file = '../lion.jpg'
+file = 'lion.jpg'
 img = cv2.imread(file)
 plt.imshow(img[:,:,::-1])
 print(img.shape)    # (480, 440, 3)

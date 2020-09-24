@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 
 # #############################################################################
 # resize an image
-file = '../lion.jpg'
+file = 'lion.jpg'
 img = cv2.imread(file)
+
 plt.imshow(img[...,::-1])
 
 # resize with width and height

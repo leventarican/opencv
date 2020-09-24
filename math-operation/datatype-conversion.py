@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # convert image from int to float 1 to 255 -> 0 to 1.0
 # this is needed on math operations
 
-img = cv2.imread('../lion.jpg')
+img = cv2.imread('lion.jpg')
 
 plt.imshow(img[...,::-1])
 plt.show()
