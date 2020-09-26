@@ -25,7 +25,12 @@ img = cv2.imread(imagepath, cv2.IMREAD_GRAYSCALE)
 #  [  2   0   0   0   5   0   4   1   3   0   0]]
 
 # ################################################
-# access a pixel
+print(f"data type {img.dtype}")
+print(f"object type {type(img)}")
+print(f"image dimension {img.shape}")
+
+# ################################################
+print(access a pixel)
 
 y = 0   # row
 x = 0   # column

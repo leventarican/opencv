@@ -1,5 +1,5 @@
 OpenCV*
-week*
+week*-python
 Sample*
 COURSE.md
 # https://github.com/davisking/dlib
@@ -9,3 +9,4 @@ dlib
 venv
 *.mp4
 .vscode
+*.zip
