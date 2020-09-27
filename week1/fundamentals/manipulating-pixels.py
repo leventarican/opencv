@@ -2,15 +2,14 @@
 # access and modify pixels
 # ##############################################################################
 
+# check also fundamentals.py
+
 # NumPy arrays store matrix in row column format
 # means if you want to access location(x,y) you need to access pixel image(y,x) instead
 
 import cv2
 import matplotlib
 import matplotlib.pyplot as plt
-
-# matplotlib.rcParams['figure.figsize'] = (6.0, 6.0)
-# matplotlib.rcParams['image.cmap'] = 'gray'
 
 imagePath = 'number_zero.jpg'
 
