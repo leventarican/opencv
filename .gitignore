@@ -10,3 +10,8 @@ venv
 *.mp4
 .vscode
 *.zip
+
+# NOT
+!screenshot*
+!lion.jpg
+!tree.png
