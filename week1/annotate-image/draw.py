@@ -54,7 +54,9 @@ def draw_text(img):
     cv2.putText(img, text, bottom_left_corner, font_face, font_scale, color=(255,0,0), thickness=2)
 
     # now center the text
-    img_height, img_width = img.shape[:2]
+    print(f"# {img.shape}") # (480, 440, 3)
+    img_height, img_width = img.shape[:2]  # start, stop, step: [0:2:0] or [:2]
+    print(f"img height: {img_height}; img width: {img_width}")
     text_size, base_line = cv2.getTextSize(text, font_face, font_scale, thickness=2)
     text_width, text_height = text_size
     print(f'text width: {text_width}; text height: {text_height}; base line: {base_line}')

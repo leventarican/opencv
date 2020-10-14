@@ -30,7 +30,7 @@ print(f"object type {type(img)}")
 print(f"image dimension {img.shape}")
 
 # ################################################
-print(access a pixel)
+print('access a pixel')
 
 y = 0   # row
 x = 0   # column
