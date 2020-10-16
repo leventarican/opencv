@@ -1,6 +1,9 @@
 import cv2
 import matplotlib.pyplot as plt
 
+# Drawing Functions in OpenCV 
+# https://docs.opencv.org/4.1.0/dc/da5/tutorial_py_drawing_functions.html
+
 def load_image(path):
     img = cv2.imread(path)
     return img
@@ -17,6 +20,7 @@ def draw_line(img):
     # with anti aliased
     cv2.line(img, (300, 30), (400, 100), (0, 255, 0), thickness=3, lineType=cv2.LINE_AA)
 
+# img	=	cv.circle(	img, center, radius, color[, thickness[, lineType[, shift]]]	)
 def draw_circle(img):
     center = (30, 30)
     radius = 10

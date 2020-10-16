@@ -12,6 +12,7 @@ deactivate
 
 ## links
 * https://courses.opencv.org/
+* https://docs.opencv.org/4.1.0/dc/d4d/tutorial_py_table_of_contents_gui.html
 * https://www.learnopencv.com/
 * https://github.com/spmallick/learnopencv
 * https://vision.in.tum.de/

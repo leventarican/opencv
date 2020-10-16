@@ -16,12 +16,14 @@ frame_width = cap.get(3)
 frame_height = cap.get(4)
 print(f"frame width, height: {frame_width}, {frame_height}")
 
+# show the one frame
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.rcParams['figure.figsize'] = (10.0, 10.0)
 plt.imshow(frame[...,::-1])
 plt.show()
 
+# play video
 # while (cap.isOpened()):
 #     ret, frame = cap.read()
 #     if ret == True:
