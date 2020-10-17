@@ -10,6 +10,13 @@ source venv/bin/activate
 deactivate
 ```
 
+# run code
+* run code from root directory
+* path to data (images) are not absolute. just file name. the images files are located usually in root directory.
+```
+python week3/threshold.py
+```
+
 ## links
 * https://courses.opencv.org/
 * https://docs.opencv.org/4.1.0/dc/d4d/tutorial_py_table_of_contents_gui.html
