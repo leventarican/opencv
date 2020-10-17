@@ -31,3 +31,10 @@ merge single channel to 3 channel: cv2.merge(alhpa, alpha, alpha)
 display matplotlib: plt.imshow(lion[:,:,::-1])  # -1 --> BGR to RGB
 uint8 to float: lion = np.float32(lion)/255
 ```
+
+# AirSim
+* https://github.com/Microsoft/AirSim/releases
+* download an asset. ex. `SoccerField.zip`
+* unzip, cd, run with: `SoccerField$ ./SoccerField.sh`
+* manual drive with key arrow, F1 for help
+* drive with API in phyton. see examples in folder `airsim`
