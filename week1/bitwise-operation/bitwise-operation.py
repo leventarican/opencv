@@ -3,6 +3,9 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+# bitwise example
+# https://docs.opencv.org/master/d0/d86/tutorial_py_image_arithmetics.html
+
 def run():
     """
     same application as in application-sunglass-filter/application.py.

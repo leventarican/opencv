@@ -81,10 +81,16 @@ def test_case0():
     print(f'modulo: {5%4}')
     print(f'display the type: {type(2)}')
 
+def reflection_introspection():
+    # getattr(__doc__, "test_case0")
+    attr = dir(__doc__)
+    print(attr)
+
 if __name__ == "__main__":
     # chart()
     # slicing()
     # create_image()
     # image_channels()
     # arrays()
-    test_case0()
+    # test_case0()
+    reflection_introspection()
