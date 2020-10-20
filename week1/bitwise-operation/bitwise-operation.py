@@ -5,6 +5,7 @@ import numpy as np
 
 # bitwise example
 # https://docs.opencv.org/master/d0/d86/tutorial_py_image_arithmetics.html
+# https://docs.opencv.org/master/d2/de8/group__core__array.html#ga60b4d04b251ba5eb1392c34425497e14
 
 def run():
     """

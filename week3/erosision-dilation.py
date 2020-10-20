@@ -18,6 +18,8 @@
 # dst =   cv.erode(   src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]] )
 # https://docs.opencv.org/4.1.0/d4/d86/group__imgproc__filter.html#gaeb1e0c1033e3f6b891a25d0511362aeb
 
+# https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_morphological_ops/py_morphological_ops.html
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt

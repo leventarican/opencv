@@ -86,6 +86,37 @@ def reflection_introspection():
     attr = dir(__doc__)
     print(attr)
 
+def debug():
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import cv2
+
+    im = np.zeros((10,10),dtype='uint8')
+    im[0,1] = 1
+    im[-1,0]= 1
+    im[-2,-1]=1
+    im[2,2] = 1
+    im[5:8,5:8] = 1
+    # plt.imshow(im, cmap="gray"); plt.show()
+
+    # https://docs.opencv.org/master/da/d6e/tutorial_py_geometric_transformations.html
+    cubic = cv2.resize(im, (50,50), interpolation=cv2.INTER_CUBIC)
+    linear = cv2.resize(im, (50,50), interpolation=cv2.INTER_LINEAR)
+
+    element = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3))
+    dilated = cv2.dilate(im, element)
+    dilated_cubic = cv2.resize(dilated, (50,50), interpolation=cv2.INTER_CUBIC)
+    dilated_linear = cv2.resize(dilated, (50,50), interpolation=cv2.INTER_LINEAR)
+
+    plt.figure(figsize=[20,20])
+    plt.subplot(161);plt.imshow(im, cmap="gray");plt.title("im");
+    plt.subplot(162);plt.imshow(cubic, cmap="gray");plt.title("cubic");
+    plt.subplot(163);plt.imshow(linear, cmap="gray");plt.title("linear");
+    plt.subplot(164);plt.imshow(dilated, cmap="gray");plt.title("dilated");
+    plt.subplot(165);plt.imshow(dilated_cubic, cmap="gray");plt.title("dilated_cubic");
+    plt.subplot(166);plt.imshow(dilated_linear, cmap="gray");plt.title("dilated_linear");
+    plt.show()
+
 if __name__ == "__main__":
     # chart()
     # slicing()
@@ -93,4 +124,5 @@ if __name__ == "__main__":
     # image_channels()
     # arrays()
     # test_case0()
-    reflection_introspection()
+    # reflection_introspection()
+    debug()

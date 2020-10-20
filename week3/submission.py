@@ -78,6 +78,10 @@ def createEllipseStructuringElement():
 
 # instead of working with max value you work with the min value.
 def erosionMethod2():
+    pass
+
+# instead of working with max value you work with the min value.
+def dilationMethod2():
     """
     Implement erosion from scratch.
     """
@@ -86,6 +90,11 @@ def erosionMethod2():
     paddedIm = cv2.copyMakeBorder(im, border, border, border, border, cv2.BORDER_CONSTANT, value = 0)
     paddedDilatedIm = paddedIm.copy()
 
+    kernel = np.zeros((3,3),dtype='uint8')
+    kernel[1,1] = 1
+
+    print(paddedDilatedIm.shape)
+
     # plt.imshow(paddedIm);plt.show()
 
     # Create a VideoWriter object
@@ -93,56 +102,50 @@ def erosionMethod2():
     ###
     ### YOUR CODE HERE
     ###
-    # out = cv2.VideoWriter('week3/dilationScratch.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (50, 50))
+    out = cv2.VideoWriter('week3/dilationScratch.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (50, 50))
 
     for h_i in range(border, height+border):
         for w_i in range(border,width+border):
             ###
             ### YOUR CODE HERE
             ###
-            row = (h_i - border, h_i + border + 1)
-            col = (w_i - border, w_i + border + 1)
-            # print(row)
-            # print(col)
-            # tmp = paddedDilatedIm[row[0]:row[1], col[0]:col[1]]
-            # tmp = paddedIm[row[0]:row[1], col[0]:col[1]]
-            paddedDilatedIm[row[0]:row[1], col[0]:col[1]] =\
-                cv2.bitwise_and(paddedIm[row[0]:row[1], col[0]:col[1]], element)
-            # plt.imshow(paddedIm[row[0]:row[1], col[0]:col[1]]); plt.show()
-            # plt.imshow(paddedDilatedIm); plt.show()
-            # return
+            # 3x3
+            row = (h_i - border, (h_i + border)+1)
+            col = (w_i - border, (w_i + border)+1)
+            dst = cv2.bitwise_and(src1=paddedIm[row[0]:row[1], col[0]:col[1]], src2=element)
+            paddedDilatedIm[row[0]+1:row[1]-1, col[0]+1:col[1]-1] = np.max(dst)
+
             # Resize output to 50x50 before writing it to the video
             ###
             ### YOUR CODE HERE
             ###
+            resized = cv2.resize(paddedDilatedIm, dsize=(50,50), interpolation=cv2.INTER_LINEAR)
 
             # Convert resizedFrame to BGR before writing
             ###
             ### YOUR CODE HERE
             ###
-            # imBGR = cv2.cvtColor(imResized, cv2.COLOR_RGB2BGR)
-            # th, dst = cv2.threshold(imBGR, 1, 255, cv2.THRESH_BINARY)
+            retval, dst = cv2.threshold(resized, 0, 255, cv2.THRESH_BINARY)
+            # paddedDilatedIm = 255 * paddedDilatedIm
+            # cv2.add(paddedDilatedIm,254))
+            imBGR = cv2.cvtColor(dst, cv2.COLOR_RGB2BGR)
+            
+            out.write(imBGR)
 
     # Release the VideoWriter object
     ###
     ### YOUR CODE HERE
     ###
-    # out.release()
+    out.release()
 
     # Display final image (cropped)
     ###
     ### YOUR CODE HERE
     ###
-    # paddedDilatedIm = paddedDilatedIm[1:10, 1:10]
+    paddedDilatedIm = paddedDilatedIm[1:11, 1:11]
     plt.imshow(paddedDilatedIm); plt.show()
 
-    plt.figure(figsize=[20,20])
-    plt.subplot(131);plt.imshow(im);plt.title("im");
-    plt.subplot(132);plt.imshow(paddedIm);plt.title("padded");
-    plt.subplot(133);plt.imshow(paddedDilatedIm);plt.title("padded dilated");
-    plt.show()
-
-def dilationMethod2():
+def dilationMethod2_deprecated():
     """
     the characteristic in this method 
     is the copying the maximium (pixel) value of the kernel 
@@ -201,5 +204,5 @@ def dilationMethod2():
 if __name__ == "__main__":
     createADemoImage()
     createEllipseStructuringElement()
-    erosionMethod2()
-    # dilationMethod2()
+    # erosionMethod2()
+    dilationMethod2()
