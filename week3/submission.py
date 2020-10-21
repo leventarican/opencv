@@ -33,18 +33,12 @@ import matplotlib
 matplotlib.rcParams['figure.figsize'] = (6.0, 6.0)
 matplotlib.rcParams['image.cmap'] = 'gray'
 
-def createADemoImage():
+def createBinaryImage():
     """
     create an empty matrix.
     add some white blobs on to image.
     """
-    global im
-
     im = np.zeros((10,10),dtype='uint8')
-    print(im);
-    # plt.imshow(im)
-    # plt.show()
-
     im[0,1] = 1
     im[-1,0]= 1
     im[-2,-1]=1
@@ -53,6 +47,8 @@ def createADemoImage():
 
     print(im)
     # plt.imshow(im); plt.show()
+
+    return im
 
 def createEllipseStructuringElement():
     """
@@ -76,12 +72,78 @@ def createEllipseStructuringElement():
     print(f"image height: {height}; width: {width}")
     # image height: 10; width: 10
 
-# instead of working with max value you work with the min value.
-def erosionMethod2():
-    pass
+def erosionWithOpenCV(im):
+    ErodedEllipseKernel = cv2.erode(im, element)
+
+    # print(ErodedEllipseKernel)
+    # plt.imshow(ErodedEllipseKernel);
+    # plt.show()
 
 # instead of working with max value you work with the min value.
-def dilationMethod2():
+def erosionMethod2(im):
+    border = ksize//2
+    paddedIm = np.zeros((height + border*2, width + border*2))
+    # fill border with value = 1
+    paddedIm = cv2.copyMakeBorder(im, border, border, border, border, cv2.BORDER_CONSTANT, value = 1)
+    paddedErodedIm = paddedIm.copy()
+
+    print(im)
+    print(paddedErodedIm)
+
+    # Create a VideoWriter object
+    # Use frame size as 50x50
+    ###
+    ### YOUR CODE HERE
+    ###
+    out = cv2.VideoWriter('week3/erosionScratch.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (50, 50))
+
+    for h_i in range(border, height+border):
+        for w_i in range(border,width+border):
+            ###
+            ### YOUR CODE HERE
+            ###
+            row = (h_i - border, (h_i + border)+1)
+            col = (w_i - border, (w_i + border)+1)
+            dst = cv2.bitwise_and(src1=paddedIm[row[0]:row[1], col[0]:col[1]], src2=element)
+            # dst = cv2.bitwise_and(src1=paddedIm[6:9, 6:9], src2=element)
+            # on im[6:9, 6:9] we have only 1 values. the min of these are 1
+            # 1 1 1     0 1 0
+            # 1 1 1 ->  1 1 1
+            # 1 1 1     0 1 0
+            values = [dst[1][1], dst[0][1], dst[1][2], dst[2][1], dst[1][0]]
+            minPixelValue = min(values)
+            paddedErodedIm[row[0]+1:row[1]-1, col[0]+1:col[1]-1] = minPixelValue
+
+            # Resize output to 50x50 before writing it to the video
+            ###
+            ### YOUR CODE HERE
+            ###
+            resized = cv2.resize(paddedErodedIm, dsize=(50,50), interpolation=cv2.INTER_LINEAR)
+
+            # Convert resizedFrame to BGR before writing
+            ###
+            ### YOUR CODE HERE
+            ###
+            retval, dst = cv2.threshold(resized, 0, 255, cv2.THRESH_BINARY)
+            imBGR = cv2.cvtColor(dst, cv2.COLOR_RGB2BGR)
+            out.write(imBGR)
+
+    # Release the VideoWriter object
+    ###
+    ### YOUR CODE HERE
+    ###
+    # out.release()
+
+    # Display final image (cropped)
+    ###
+    ### YOUR CODE HERE
+    ###
+    paddedErodedIm = paddedErodedIm[1:11, 1:11]
+    print(paddedErodedIm)
+    plt.imshow(paddedErodedIm); plt.show()
+
+# ~ maximize
+def dilationMethod2(im):
     """
     Implement erosion from scratch.
     """
@@ -89,13 +151,6 @@ def dilationMethod2():
     paddedIm = np.zeros((height + border*2, width + border*2))
     paddedIm = cv2.copyMakeBorder(im, border, border, border, border, cv2.BORDER_CONSTANT, value = 0)
     paddedDilatedIm = paddedIm.copy()
-
-    kernel = np.zeros((3,3),dtype='uint8')
-    kernel[1,1] = 1
-
-    print(paddedDilatedIm.shape)
-
-    # plt.imshow(paddedIm);plt.show()
 
     # Create a VideoWriter object
     # Use frame size as 50x50
@@ -113,7 +168,9 @@ def dilationMethod2():
             row = (h_i - border, (h_i + border)+1)
             col = (w_i - border, (w_i + border)+1)
             dst = cv2.bitwise_and(src1=paddedIm[row[0]:row[1], col[0]:col[1]], src2=element)
-            paddedDilatedIm[row[0]+1:row[1]-1, col[0]+1:col[1]-1] = np.max(dst)
+            values = [dst[1][1], dst[0][1], dst[1][2], dst[2][1], dst[1][0]]
+            maxPixelValue = max(values)
+            paddedDilatedIm[row[0]+1:row[1]-1, col[0]+1:col[1]-1] = maxPixelValue
 
             # Resize output to 50x50 before writing it to the video
             ###
@@ -145,64 +202,9 @@ def dilationMethod2():
     paddedDilatedIm = paddedDilatedIm[1:11, 1:11]
     plt.imshow(paddedDilatedIm); plt.show()
 
-def dilationMethod2_deprecated():
-    """
-    the characteristic in this method 
-    is the copying the maximium (pixel) value of the kernel 
-    over to the middle pixel of the image
-    """
-    global ksize, height, width, element, im
-
-    border = ksize//2   # // cast to integer
-    print(f"copy image with border: {border}")
-    # copy image with border: 1
-
-    # Create a padded image with zeros padding
-    # why are we doing this? to make space for the kernel
-
-    # padded image method 2: with OpenCV copyMakeBorder function
-    # The function copies the source image into the middle of the destination image. 
-    # The areas to the left, to the right, above and below the copied source image will be filled with extrapolated pixels.
-    # dst	=	cv.copyMakeBorder(	src, top, bottom, left, right, borderType[, dst[, value]]	)
-    # https://docs.opencv.org/4.1.0/d2/de8/group__core__array.html#ga2ac1049c2c3dd25c2b41bffe17658a36
-    paddedIm = cv2.copyMakeBorder(im, border, border, border, border, cv2.BORDER_CONSTANT, value = 0)
-    # plt.imshow(paddedIm);plt.show()
-
-    paddedHeight, paddedWidth = paddedIm.shape[:2]
-    print(f"padded image height: {paddedHeight}; width: {paddedWidth}")
-    # padded image height: 12; width: 12
-    
-    maxValue = np.max(element)
-    print(f"maximum value: {maxValue}")
-    # maximum value: 1
-
-    out = cv2.VideoWriter('dilation.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (50, 50))
-
-    # go through padded image pixel by pixel. from left to right (col). then next row.
-    # our reference is im, but we move on paddedim
-    for h_i in range(border, height+border):
-        for w_i in range(border, width+border):
-            # when you find a white pixel in neighborhood (ellipse): top, bottom, left, right
-            if paddedIm[h_i-1, w_i]:
-                im[h_i-1, w_i-1] = 255
-            elif paddedIm[h_i+1, w_i]:
-                im[h_i-1, w_i-1] = 255
-            elif paddedIm[h_i, w_i-1]:
-                im[h_i-1, w_i-1] = 255
-            elif paddedIm[h_i, w_i+1]:
-                im[h_i-1, w_i-1] = 255
-            
-            imResized = cv2.resize(im, (50, 50), interpolation=cv2.INTER_LINEAR)
-            imBGR = cv2.cvtColor(imResized, cv2.COLOR_RGB2BGR)
-            out.write(imBGR)
-            result = paddedIm
-            # plt.imshow(imBGR);plt.show()
-
-    plt.imshow(im);plt.show()
-    out.release()
-
 if __name__ == "__main__":
-    createADemoImage()
+    im = createBinaryImage()
     createEllipseStructuringElement()
-    # erosionMethod2()
-    dilationMethod2()
+    # erosionWithOpenCV(im)
+    erosionMethod2(im)
+    dilationMethod2(im)
