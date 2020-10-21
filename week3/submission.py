@@ -132,7 +132,7 @@ def erosionMethod2(im):
     ###
     ### YOUR CODE HERE
     ###
-    # out.release()
+    out.release()
 
     # Display final image (cropped)
     ###
@@ -145,7 +145,7 @@ def erosionMethod2(im):
 # ~ maximize
 def dilationMethod2(im):
     """
-    Implement erosion from scratch.
+    Implement dilation from scratch.
     """
     border = ksize//2
     paddedIm = np.zeros((height + border*2, width + border*2))
