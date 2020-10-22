@@ -7,3 +7,5 @@
 ![threshold](screenshot.png)
 * erosion, dilation (method 2)
 ![method2](screenshot-method2.png)
+* contours
+![method2](screenshot-contours.png)
