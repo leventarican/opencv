@@ -1,7 +1,8 @@
 OpenCV*
 week*-python
 Sample*
-COURSE.md
+*.md
+!README.md
 # https://github.com/davisking/dlib
 dlib
 *.png

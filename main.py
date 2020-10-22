@@ -117,6 +117,70 @@ def debug():
     plt.subplot(166);plt.imshow(dilated_linear, cmap="gray");plt.title("dilated_linear");
     plt.show()
 
+def waitkey_demo():
+    """
+    the function waitKey() waits for a key event for a "delay"
+    """
+    import cv2 
+    
+    img = cv2.imread("lion.jpg", cv2.IMREAD_GRAYSCALE)
+    cv2.imshow("waitkey_demo", img)
+    k = cv2.waitKey(2000)
+    print(k)
+
+def imread_demo():
+    import cv2 
+
+    # img_path = "lion.jpg"
+    # img_path = "sunglass.png"
+    img_path = "threshold.png"
+
+    img = cv2.imread(img_path)
+    img_grayscale = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    img_color = cv2.imread(img_path, cv2.IMREAD_COLOR)
+    img_unchanged = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+
+    # cv2.imshow("imread_demo", img)
+    # cv2.waitKey(0)
+
+    print(img.shape)
+    print(img_grayscale.shape)
+    print(img_color.shape)
+    print(img_unchanged.shape)
+
+    # (480, 440, 3)
+    # (480, 440)
+    # (480, 440, 3)
+    # (480, 440, 3)
+
+    # (273, 627, 3)
+    # (273, 627)
+    # (273, 627, 3)
+    # (273, 627, 4)
+
+    # grayscale image channel number: 1
+    # color image channel number: 3
+    # unchanged image channel number: 1, 3 or 4 (when image has alpha channel)
+
+def overflow():
+    import cv2
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    image = cv2.imread("debug.png",1)
+    # Convert to RGB
+    imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    print(np.unique(imageRGB))
+    print(imageRGB[10])
+
+    # Add 200 to image
+    imageRGB = cv2.add(imageRGB,200)
+    print(np.unique(imageRGB))
+    print(imageRGB[10])
+
+    plt.imshow(imageRGB)
+    plt.show()
+
 if __name__ == "__main__":
     # chart()
     # slicing()
@@ -125,4 +189,7 @@ if __name__ == "__main__":
     # arrays()
     # test_case0()
     # reflection_introspection()
-    debug()
+    # debug()
+    # waitkey_demo()
+    # imread_demo()
+    overflow()

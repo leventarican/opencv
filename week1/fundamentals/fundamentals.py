@@ -1,5 +1,13 @@
 import cv2
 
+# HighGui (imshow() is a function of HighGui) 
+
+# The function waitKey() waits for a key event for a "delay" (example 30 milliseconds).
+
+# if you don't call waitKey, HighGui cannot process windows events 
+# like redraw, resizing, input event, etc. So just call it, even with a 1ms delay :)
+# https://stackoverflow.com/questions/12452118/what-does-waitkey-30-mean-in-opencv
+
 def display():
     windows_id = 'imageviewer'
     cv2.imshow(windows_id, img)

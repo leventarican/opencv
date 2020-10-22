@@ -6,6 +6,9 @@
 # dilation; english meaning: expand or larger a shape. ex. make white regions bigger
 # erosion: english meaning: shrink a shape
 
+# Morphological Gradient: is the difference between dilation and erosion of an image.
+# https://docs.opencv.org/4.1.0/d9/d61/tutorial_py_morphological_ops.html
+
 # Dilation is used to merge or expand white regions which may be close to each other and
 # Erosion is used to separate or shrink white regions
 

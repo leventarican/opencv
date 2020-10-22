@@ -111,6 +111,26 @@ def exampleParameters():
     plt.imshow(im[:,:,::-1])
     plt.show()
 
+# In the example covered in Week 3, we discussed about Simple Blob Detector. 
+# If a simple blob detector is used on the following images with default parameters, 
+# except filterByArea parameter set to False, what is the number of blobs detected for each image?
+def exampleBlob(imagePath):
+    params = cv2.SimpleBlobDetector_Params()
+    params.filterByArea = False
+    detector = cv2.SimpleBlobDetector_create(params)
+
+    im = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE)
+    keypoints = detector.detect(im)
+
+    print(keypoints)
+
+    im = cv2.cvtColor(im, cv2.COLOR_GRAY2BGR)
+
+    plt.imshow(im[:,:,::-1])
+    plt.show()
+
 if __name__ == "__main__":
     # example()
-    exampleParameters()
+    # exampleParameters()
+    exampleBlob("week3/blob-0.png")
+    exampleBlob("week3/blob-1.png")

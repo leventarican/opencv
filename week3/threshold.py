@@ -108,7 +108,13 @@ def binaryThresholding(src, thresh, maxValue):
     """
     docstring
     """
+    thresh = 127
+    maxValue = 255
     th, dst = cv2.threshold(src, thresh, maxValue, cv2.THRESH_BINARY)
+
+    print(np.unique(dst[dst > 100]))
+    print(np.unique(dst))
+
     return dst
 
 def inverseBinaryThresholding(src, thresh, maxValue):
@@ -153,7 +159,7 @@ def displayAndCompare():
     print("Threshold Value = {}, Max Value = {}".format(thresh, maxValue))
     plt.figure(figsize=[20,12])
     plt.subplot(231);plt.imshow(src, cmap='gray', vmin=0, vmax=255);plt.title("Original Image");
-    plt.subplot(232);plt.imshow(dst_bin, cmap='gray', vmin=0, vmax=255);plt.title("Threshold Binary");
+    plt.subplot(232);plt.imshow(dst_bin, cmap='gray', vmin=0, vmax=255);plt.title("Threshold Binary | cv2.THRESH_BINARY");
     plt.subplot(233);plt.imshow(dst_bin_inv, cmap='gray', vmin=0, vmax=255);plt.title("Threshold Binary Inverse");
     plt.subplot(234);plt.imshow(dst_trunc, cmap='gray', vmin=0, vmax=255);plt.title("Threshold Truncate");
     plt.subplot(235);plt.imshow(dst_to_zero, cmap='gray', vmin=0, vmax=255);plt.title("Threshold To Zero");

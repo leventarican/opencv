@@ -7,10 +7,18 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-# use cv2.resize for image resize
+# use cv2.resize for image resize, shrink
 # dst = cv2.resize( src, dsize[, dst[, fx[, fy[, interpolation]]]] )
 # https://docs.opencv.org/4.1.0/da/d54/group__imgproc__transform.html#ga47a974309e9102f5f08231edc7e7529d
-
+# 
+# interpolation algorithms
+# InterpolationFlags: cv.INTER_LANCZOS4, cv.INTER_NEAREST, cv.INTER_LINEAR, cv.INTER_AREA
+# Lanczos interpolation over 8x8 neighborhood, nearest neighbor interpolation, bilinear interpolation, resampling using pixel area relation
+# https://docs.opencv.org/4.1.0/da/d54/group__imgproc__transform.html#ga5bb5a1fea74ea38e1a5445ca803ff121
+# 
+# To shrink an image, it will generally look best with INTER_AREA interpolation, 
+# whereas to enlarge an image, it will generally look best with c::INTER_CUBIC (slow) or INTER_LINEAR (faster but still looks OK).
+# https://docs.opencv.org/4.1.0/da/d54/group__imgproc__transform.html#gga5bb5a1fea74ea38e1a5445ca803ff121aa5521d8e080972c762467c45f3b70e6c
 def scale_width_height():
     """
     scale with width and height
