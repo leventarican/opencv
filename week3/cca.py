@@ -16,7 +16,7 @@ def loadImage():
     """
     Read image as grayscale
     """
-    im = cv2.imread("week3/truth.png", cv2.IMREAD_GRAYSCALE)
+    im = cv2.imread("truth.png", cv2.IMREAD_GRAYSCALE)
     # plt.imshow(im)
     # plt.show()
 

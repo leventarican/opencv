@@ -26,6 +26,8 @@ python week3/threshold.py
 * https://github.com/spmallick/learnopencv
 * https://vision.in.tum.de/
 * https://dvl.in.tum.de/research/
+* http://fivedots.coe.psu.ac.th/~ad/vbi/
+* https://www.learnopencv.com/snake-game-with-opencv-python/
 
 ## cheatsheet
 ```

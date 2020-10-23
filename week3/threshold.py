@@ -12,6 +12,12 @@ import matplotlib
 # threshold to zero
 # inverted threshold to zero
 
+# A binary image is one that consists of pixels that can have one of exactly two colors
+# https://en.wikipedia.org/wiki/Binary_image
+
+# Image thresholding is used in many applications as a pre-processing step.
+# https://www.learnopencv.com/otsu-thresholding-with-opencv/
+
 matplotlib.rcParams['figure.figsize'] = (6.0, 6.0)
 matplotlib.rcParams['image.cmap'] = 'gray'
 
