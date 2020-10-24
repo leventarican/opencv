@@ -20,7 +20,7 @@ python week3/threshold.py
 ## links
 * https://courses.opencv.org/
 * https://docs.opencv.org/4.1.0
-* https://docs.opencv.org/4.1.0/dc/d4d/tutorial_py_table_of_contents_gui.html
+* https://docs.opencv.org/4.1.0/de/d7a/tutorial_table_of_content_core.html
 * http://szeliski.org/Book/
 * https://www.learnopencv.com/
 * https://github.com/spmallick/learnopencv
