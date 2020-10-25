@@ -14,79 +14,10 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 
-# matplotlib.rcParams['figure.figsize'] = (10.0, 10.0)
-# matplotlib.rcParams['image.cmap'] = 'gray'
-
-global cap
-
 def callback(*args):
-    value = args[0]
-    # print(value)
-
-def read():
-    global cap
-
-    file = "project1/feature3/greenscreen-asteroid.mp4"
-    cap = cv2.VideoCapture(file)
-
-    ret, frame = cap.read()
-    frame_width = cap.get(3)
-    frame_height = cap.get(4)
-    print(f"frame read result: {ret}")
-
-# some thoughts:
-# - work in HSV color space to identify green saturation
-def processFrame():
-    global cap
-
-    _, frame = cap.read()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-    lowerb = np.array([0, 0, 0])
-    upperb = np.array([100, 255, 255])
-    mask = cv2.inRange(hsv, lowerb=lowerb, upperb=upperb)
-
-    plt.imshow("frame", frame)
-    plt.imshow("mask", mask)
-
-    # windowName = "debug"
-    # cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
-    # cv2.createTrackbar("debug", windowName, 0, 3, callback)
-    # debug = np.zeros([100, 100], np.uint8)
-    # cv2.imshow("debug", debug)
-
-    # plt.show()
-    _ = cv2.waitKey(0)
-
-    # while True:
-    #     k = cv2.waitKey(1000) & 0xFF
-    #     if k == 27:
-    #         break
-
-    cap.release()
-    cv2.destroyAllWindows()
-
-def process():
-    global cap
-
-    while (cap.isOpened()):
-        ret, frame = cap.read()
-        if ret == True:
-            cv2.imshow('frame', frame)
-            cv2.waitKey(25) # wait in ms before move to next frame
-        else:
-            break
-
-def write():
     pass
 
-def close():
-    global cap
-
-    cap.release()
-    cv2.destroyAllWindows()
-
-def debug_():
+def video():
     lowerHue = 0
     upperHue = 179
     lowerSaturation = 0
@@ -110,7 +41,8 @@ def debug_():
     frame_height = int(cap.get(4))
     print(f"frame read result: {ret}; width: {frame_width}; height: {frame_height}")
 
-    out = cv2.VideoWriter("project1/feature3/output.mp4", cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+    out = cv2.VideoWriter("project1/feature3/output.mp4", \
+        cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
     background = cv2.imread("project1/feature3/background.jpg", cv2.IMREAD_UNCHANGED)
 
@@ -134,10 +66,6 @@ def debug_():
             bg = cv2.subtract(background, mask)
             blended = cv2.add(fg, bg)
 
-            # cv2.imshow("frame", frame)
-            # cv2.imshow("mask", mask)
-            # cv2.imshow("foreground", fg)
-            # cv2.imshow("background", bg)
             cv2.imshow("debug", np.zeros([100, 100], np.uint8))
             cv2.imshow("blended", blended)
 
@@ -153,7 +81,8 @@ def debug_():
     out.release()
     cv2.destroyAllWindows()
 
-def debug():
+# only a single frame
+def frame():
     lowerHue = 0
     upperHue = 179
     lowerSaturation = 0
@@ -170,7 +99,6 @@ def debug():
     cv2.createTrackbar("lower value", windowName, 200, 255, callback)
     cv2.createTrackbar("upper value", windowName, 255, 255, callback)
 
-    # video frame
     file = "project1/feature3/greenscreen-asteroid.mp4"
     cap = cv2.VideoCapture(file)
     ret, frame = cap.read()
@@ -201,10 +129,10 @@ def debug():
         bg = cv2.subtract(background, mask)
         blended = cv2.add(fg, bg)
 
-        # cv2.imshow("frame", frame)
-        # cv2.imshow("mask", mask)
-        # cv2.imshow("foreground", fg)
-        # cv2.imshow("background", bg)
+        cv2.imshow("frame", frame)
+        cv2.imshow("mask", mask)
+        cv2.imshow("foreground", fg)
+        cv2.imshow("background", bg)
         cv2.imshow("debug", np.zeros([100, 100], np.uint8))
         cv2.imshow("blended", blended)
 
@@ -215,12 +143,5 @@ def debug():
 # 2. process each frame: replace green with a background
 # 3. write video: each frame
 if __name__ == "__main__":
-    # debug()
-    debug_()
-
-    # read()
-    # createWindow()
-    # processFrame()
-    # process()
-    # write()
-    # close()
+    # frame()
+    video()
