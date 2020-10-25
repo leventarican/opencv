@@ -87,7 +87,6 @@ def close():
     cv2.destroyAllWindows()
 
 def debug():
-
     lowerHue = 0
     upperHue = 179
     lowerSaturation = 0
@@ -113,10 +112,7 @@ def debug():
     print(f"frame read result: {ret}; width: {frame_width}; height: {frame_height}")
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    background = cv2.imread("project1/feature3/background.jpg", -1)
-    hsvBackground = cv2.cvtColor(background, cv2.COLOR_BGR2HSV)
-    # print(hsvBackground.dtype)
-    # print(hsvBackground.shape)
+    background = cv2.imread("project1/feature3/background.jpg", cv2.IMREAD_UNCHANGED)
 
     while True:
         k = cv2.waitKey(100) & 0xFF
@@ -130,74 +126,20 @@ def debug():
         lowerValue = cv2.getTrackbarPos("lower value", windowName)
         upperValue = cv2.getTrackbarPos("upper value", windowName)
 
-        # mask
-        lowerb = np.array([lowerHue, lowerSaturation, lowerValue])
-        upperb = np.array([upperHue, upperSaturation, upperValue])
-        mask = cv2.inRange(hsv, lowerb=lowerb, upperb=upperb)
+        mask = cv2.inRange(hsv, lowerb=(lowerHue, lowerSaturation, lowerValue),\
+            upperb=(upperHue, upperSaturation, upperValue))
         mask = cv2.bitwise_not(mask)
+        mask = cv2.merge((mask, mask, mask))     
+        fg = cv2.bitwise_and(mask, frame)
+        bg = cv2.subtract(background, mask)
+        blended = cv2.add(fg, bg)
 
-        mergedMask = cv2.merge((mask, mask, mask))
-        
-        tmp = cv2.subtract(background, mergedMask)
-        
-        print(mergedMask.shape)
-        print(background.shape)
-
-        # dst = cv2.bitwise_or(frame, background, mask=mask)
-        dst = cv2.bitwise_and(mergedMask, frame)
-        # dst = cv2.bitwise_and(background, dst)
-        dst = cv2.add(dst, tmp)
-
-        cv2.imshow("frame", frame[:,:,::-1])
-        cv2.imshow("mask", mask)
+        # cv2.imshow("frame", frame)
+        # cv2.imshow("mask", mask)
+        # cv2.imshow("foreground", fg)
+        # cv2.imshow("background", bg)
         cv2.imshow("debug", np.zeros([100, 100], np.uint8))
-        cv2.imshow("background", background)
-        cv2.imshow("and", dst)
-        cv2.imshow("tmp", tmp)
-
-    cap.release()
-    cv2.destroyAllWindows()
-
-def debug_():
-    # debug
-    windowName = "debug"
-    cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
-
-    # OpenCV hue green: 0 - 180
-    cv2.createTrackbar("lower hue", windowName, 0, 179, callback)
-    cv2.createTrackbar("upper hue", windowName, 179, 179, callback)
-    cv2.createTrackbar("lower saturation", windowName, 0, 255, callback)
-    cv2.createTrackbar("upper saturation", windowName, 255, 255, callback)
-    cv2.createTrackbar("lower value", windowName, 0, 255, callback)
-    cv2.createTrackbar("upper value", windowName, 255, 255, callback)
-
-    lowerHue = cv2.getTrackbarPos("lower hue", windowName)
-    upperHue = cv2.getTrackbarPos("upper hue", windowName)
-    lowerSaturation = cv2.getTrackbarPos("lower saturation", windowName)
-    upperSaturation = cv2.getTrackbarPos("upper saturation", windowName)
-    lowerValue = cv2.getTrackbarPos("lower value", windowName)
-    upperValue = cv2.getTrackbarPos("upper value", windowName)
-
-    # video frame
-    file = "project1/feature3/greenscreen-asteroid.mp4"
-    cap = cv2.VideoCapture(file)
-    ret, frame = cap.read()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-    # mask
-    lowerb = np.array([lowerHue, lowerSaturation, lowerValue])
-    upperb = np.array([upperHue, upperSaturation, upperValue])
-    mask = cv2.inRange(hsv, lowerb=lowerb, upperb=upperb)
-
-    # process
-
-
-    # display
-    cv2.imshow("frame", frame)
-    cv2.imshow("mask", mask)
-    cv2.imshow("debug", np.zeros([100, 100], np.uint8))
-
-    _ = cv2.waitKey(0)
+        cv2.imshow("blended", blended)
 
     cap.release()
     cv2.destroyAllWindows()
@@ -207,6 +149,7 @@ def debug_():
 # 3. write video: each frame
 if __name__ == "__main__":
     debug()
+    # debug_()
 
     # read()
     # createWindow()
