@@ -9,6 +9,8 @@
 # In many applications color images are converted to grayscale 
 # and gradients are calculated using the grayscale image.
 
+# A good way to express changes is by using derivatives.
+
 # there are X gradiants and Y gradiants. Intensity changes in x direction and 
 # respectivly in y direction.
 

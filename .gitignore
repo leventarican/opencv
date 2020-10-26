@@ -1,21 +1,22 @@
+# https://github.com/davisking/dlib
+dlib
+venv
+.vscode
+__MACOSX
 OpenCV*
 week*-python
 Sample*
-*.md
-!README.md
-# https://github.com/davisking/dlib
-dlib
-*.png
-*.jpg
-venv
-*.mp4
-.vscode
-*.zip
-__MACOSX
 
 ignore*
+*.pdf
+*.zip
+*.mp4
+*.png
+*.jpg
+*.md
 
 # NOT
+!README.md
 !screenshot*
 !lion.jpg
 !tree.png
